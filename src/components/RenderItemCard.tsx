@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-  TextStyle,
 } from 'react-native';
 import { FontScale, timeConversion } from '../utils';
 import { Colors } from '../Colors/Colors';
