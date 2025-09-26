@@ -7,8 +7,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Button,
-  TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -21,36 +19,30 @@ import {
   RenderTaskStatusCard,
 } from '../components';
 import { priorityOptions, statusOptions } from '../constants';
-import { v4 as uuidv4 } from 'uuid';
-import { useAppDispatch } from '../store/hooks';
-import { addTask, removeTask, updateTask } from '../store/slices/taskSlice';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useTaskDetail } from '../hooks';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskDetails'>;
 
 const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
-  const { task: selectedTask = [], canUpdate = false } = route?.params ?? {};
-  const dispatch = useAppDispatch();
-  const [title, setTitle] = useState(selectedTask?.title || '');
-  const [description, setDescription] = useState(
-    selectedTask?.description || '',
-  );
-  const [status, setStatus] = useState<
-    'completed' | 'overdue' | 'pending' | string
-  >(selectedTask?.status || 'pending');
-  const [priority, setPriority] = useState<'high' | 'medium' | 'low'>(
-    selectedTask?.priority || 'medium',
-  );
+  const { canUpdate = false } = route?.params ?? {};
+  const {
+    title,
+    setTitle,
+    description,
+    setDescription,
+    setStatus,
+    status,
+    priority,
+    setPriority,
+    handleOpenCalender,
+    dueDate,
+    showPicker,
+    onChangeDatePickerValue,
+    handleTask,
+    handleDeleteTask,
+  } = useTaskDetail();
 
-  const [dueDate, setDueDate] = useState(
-    selectedTask?.dueDate ? new Date(selectedTask?.dueDate) : new Date(),
-  );
-  const [showPicker, setShowPicker] = useState(false);
-  const onChange = (event: any, selectedDate?: Date) => {
-    setShowPicker(Platform.OS === 'ios'); // Keep open on iOS
-    if (selectedDate) setDueDate(selectedDate);
-  };
-  
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -113,11 +105,7 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
           {/* Due Date */}
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>📅 Due Date</Text>
-            <TouchableOpacity
-              onPress={() => {
-                setShowPicker(true);
-              }}
-            >
+            <TouchableOpacity onPress={handleOpenCalender}>
               <TextInput
                 value={dueDate ? dueDate.toLocaleDateString() : 'Select Date'}
                 editable={false}
@@ -131,7 +119,7 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
                 value={dueDate || new Date()}
                 mode="date"
                 display="default"
-                onChange={onChange}
+                onChange={onChangeDatePickerValue}
               />
             )}
           </View>
@@ -141,22 +129,7 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
             <View style={styles.actionButtons}>
               <CommonButton
                 title={canUpdate ? 'Update Task' : 'Create Task'}
-                onPress={() => {
-                  const obj = {
-                    id: canUpdate ? selectedTask?.id : uuidv4(),
-                    title,
-                    description,
-                    status,
-                    priority,
-                    dueDate: dueDate.toString(),
-                    updatedAt: new Date().toISOString(),
-                  };
-                  canUpdate
-                    ? dispatch(updateTask(obj))
-                    : dispatch(addTask(obj));
-
-                  navigation.goBack();
-                }}
+                onPress={handleTask}
                 type="save"
                 disabled={!title.trim()}
               />
@@ -164,10 +137,7 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
               {canUpdate && (
                 <CommonButton
                   title="🗑️ Delete Task"
-                  onPress={() => {
-                    dispatch(removeTask(selectedTask?.id));
-                    navigation.goBack();
-                  }}
+                  onPress={handleDeleteTask}
                   type="delete"
                 />
               )}
