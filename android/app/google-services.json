@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "769383326935",
+    "project_id": "fir-test-145c4",
+    "storage_bucket": "fir-test-145c4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769383326935:android:71d4a5a0561b6f78d2bc92",
+        "android_client_info": {
+          "package_name": "com.firebasetest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXRdETOWFEv7nBXxrQrFMpnqPgSq3ww-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769383326935:android:607658f571f35563d2bc92",
+        "android_client_info": {
+          "package_name": "com.tasktracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXRdETOWFEv7nBXxrQrFMpnqPgSq3ww-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

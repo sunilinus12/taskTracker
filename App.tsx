@@ -15,6 +15,7 @@ import {
 import { AppNavigation } from './src/navigation';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
+import { NavigationContainer } from '@react-navigation/native';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,7 +25,9 @@ function App() {
       <SafeAreaProvider>
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-          <AppNavigation />
+          <NavigationContainer>
+            <AppNavigation />
+          </NavigationContainer>
         </SafeAreaView>
       </SafeAreaProvider>
     </Provider>
