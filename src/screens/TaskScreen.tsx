@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigation';
@@ -6,16 +6,23 @@ import {
   CommonHeader,
   FloatingIcon,
   ListEmptyComponent,
+  LoadingComponent,
   RenderItemCard,
 } from '../components';
 import { Task } from '../components/RenderItemCard';
-import { useAppSelector } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
+import { loadTasks } from '../store/slices/taskSlice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const TaskScreen: React.FC<Props> = ({ navigation }) => {
-  const { tasks: listTasks } = useAppSelector(e => e.tasks);
+  const dispatch = useAppDispatch();
+  const { tasks: listTasks, loading } = useAppSelector(e => e.tasks);
+
+  useLayoutEffect(() => {
+    dispatch(loadTasks());
+  }, []);
 
   const renderCard = useCallback(
     ({ item }: { item: Task }) => (
@@ -43,14 +50,20 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <CommonHeader title="Tasks" subtitle="" />
-      <FlatList
-        contentContainerStyle={styles.flatlistContainer}
-        data={listTasks as Task[]}
-        keyExtractor={keyExtractor}
-        renderItem={renderCard}
-        ListEmptyComponent={ListEmptyComponent}
-      />
-      <FloatingIcon onPress={handleFloatingIconPress} />
+      {loading ? (
+        <LoadingComponent />
+      ) : (
+        <>
+          <FlatList
+            contentContainerStyle={styles.flatlistContainer}
+            data={listTasks as Task[]}
+            keyExtractor={keyExtractor}
+            renderItem={renderCard}
+            ListEmptyComponent={ListEmptyComponent}
+          />
+          <FloatingIcon onPress={handleFloatingIconPress} />
+        </>
+      )}
     </View>
   );
 };

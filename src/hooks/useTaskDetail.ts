@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useAppDispatch } from '../store/hooks';
-import { addTask, removeTask, updateTask } from '../store/slices/taskSlice';
+import {
+  addTaskAsync,
+  removeTaskAsync,
+  updateTaskAsync,
+} from '../store/slices/taskSlice';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
+import { Platform } from 'react-native';
 
 const useTaskDetail = () => {
   const dispatch = useAppDispatch();
@@ -25,35 +30,48 @@ const useTaskDetail = () => {
     selectedTask?.dueDate ? new Date(selectedTask?.dueDate) : new Date(),
   );
   const [showPicker, setShowPicker] = useState(false);
-  const onChangeDatePickerValue = (event: any, selectedDate?: Date) => {
-    setShowPicker(Platform.OS === 'ios'); // Keep open on iOS
-    if (selectedDate) setDueDate(selectedDate);
-  };
-  const handleTask = () => {
+  const onChangeDatePickerValue = useCallback(
+    (event: any, selectedDate?: Date) => {
+      // setShowPicker(Platform.OS === 'ios'); 
+      setShowPicker(false)
+      if (selectedDate) setDueDate(selectedDate);
+    },
+    [],
+  );
+
+  const handleTask = useCallback(() => {
     try {
+      if (!title) return;
       const obj = {
-        id: canUpdate ? selectedTask?.id : uuidv4(),
+        id: canUpdate && selectedTask?.id ? selectedTask.id : uuidv4(),
         title,
         description,
         status,
         priority,
-        dueDate: dueDate.toString(),
+        dueDate:
+          dueDate instanceof Date ? dueDate.toISOString() : String(dueDate),
         updatedAt: new Date().toISOString(),
       };
-      canUpdate ? dispatch(updateTask(obj)) : dispatch(addTask(obj));
+      if (canUpdate) {
+        dispatch(updateTaskAsync(obj));
+      } else {
+        dispatch(addTaskAsync(obj));
+      }
+      navigation.goBack();
+    } catch (error) {
+      console.error('handleTask error:', error);
+    }
+  }, [selectedTask, canUpdate, dueDate, title, status, priority]);
 
-      navigation.goBack();
-    } catch (error) {}
-  };
-  const handleDeleteTask = () => {
+  const handleDeleteTask = useCallback(() => {
     try {
-      dispatch(removeTask(selectedTask?.id));
+      dispatch(removeTaskAsync(selectedTask?.id.toString()));
       navigation.goBack();
     } catch (error) {}
-  };
-  const handleOpenCalender = () => {
+  }, [selectedTask]);
+  const handleOpenCalender = useCallback(() => {
     setShowPicker(true);
-  };
+  }, []);
 
   return {
     title,
@@ -70,7 +88,6 @@ const useTaskDetail = () => {
     onChangeDatePickerValue,
     handleTask,
     handleDeleteTask,
-    
   };
 };
 

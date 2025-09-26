@@ -7,6 +7,7 @@ import RenderPriorityCard from './RenderPriorityCard';
 import CustomTextInput from './CustomTextInput';
 import CommonButton from './CommonButton';
 import ListEmptyComponent from './ListEmptyComponent';
+import LoadingComponent from './LoadingComponent';
 
 export {
   CommonHeader,
@@ -18,4 +19,5 @@ export {
   CustomTextInput,
   CommonButton,
   ListEmptyComponent,
+  LoadingComponent
 };
