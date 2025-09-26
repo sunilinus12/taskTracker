@@ -12,10 +12,10 @@ export type Task = {
   id: string | number;
   title: string;
   description?: string;
-  status: 'completed' | 'overdue' | 'pending'|string;
+  status: 'completed' | 'overdue' | 'pending' | string;
   priority: 'high' | 'medium' | 'low' | 'default';
   updatedAt: string;
-  dueDate?:string
+  dueDate?: string;
 };
 
 type RenderItemCardProps = {
@@ -47,6 +47,7 @@ const RenderItemCard: React.FC<RenderItemCardProps> = ({ task, onPress }) => {
         return styles.pendingStatus;
     }
   };
+  console.log('item', task.updatedAt);
 
   return (
     <TouchableOpacity

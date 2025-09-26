@@ -38,7 +38,7 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1 ,backgroundColor: '#F9FAFB'},
   title: { fontSize: 20, fontWeight: 'bold', marginBottom: 16 },
   flatlistContainer: {
     flexGrow: 1,

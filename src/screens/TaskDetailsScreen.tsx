@@ -101,15 +101,20 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
               title={canUpdate ? 'Update Task' : 'Create Task'}
               onPress={() => {
                 const obj = {
-                  id: uuidv4(),
-                  title: title,
+                  id: canUpdate ? selectedTask?.id : uuidv4(), 
+                  title,
                   description,
                   status,
                   priority,
-                  dueDate: dueDate.toString(), // <-- store as string
-                  updatedAt: new Date().toISOString(), // <-- store as string
+                  dueDate: dueDate.toString(), 
+                  updatedAt: new Date().toISOString(),
                 };
-                canUpdate ? dispatch(updateTask(obj)) : dispatch(addTask(obj));
+
+                canUpdate
+                  ? dispatch(updateTask(obj)) 
+                  : dispatch(addTask(obj)); 
+
+                navigation.goBack();
               }}
               type="save"
               disabled={!title.trim()}
@@ -120,6 +125,7 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
                 title="🗑️ Delete Task"
                 onPress={() => {
                   dispatch(removeTask(selectedTask?.id));
+                  navigation.goBack()
                 }}
                 type="delete"
               />
