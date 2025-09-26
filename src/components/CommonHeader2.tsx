@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AppImages } from '../resources';
-import { HeightPercentage, WidthPercentage } from '../utils';
+import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
 import { Colors } from '../Colors/Colors';
 
 type CommonHeader2Props = {
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     color: Colors.inputLabel,
   },
   editHeaderTitle: {
-    fontSize: 20,
+    fontSize: FontScale(18),
     fontWeight: 'bold',
     color: Colors.blackVarient,
   },
