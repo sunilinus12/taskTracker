@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AppImages } from '../resources';
+import { HeightPercentage, WidthPercentage } from '../utils';
+import { Colors } from '../Colors/Colors';
 
 type CommonHeader2Props = {
   isEditing?: boolean;
@@ -16,7 +19,7 @@ const CommonHeader2: React.FC<CommonHeader2Props> = ({
     <View style={styles.header}>
       <View style={styles.editHeader}>
         <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-          <Text style={styles.backButtonText}>{`\u2190`}</Text>
+          <Image style={styles.backImage} source={AppImages.backIcon} />
         </TouchableOpacity>
 
         <Text style={styles.editHeaderTitle}>
@@ -33,11 +36,11 @@ export default CommonHeader2;
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
     paddingHorizontal: 24,
     paddingTop: 16,
     paddingBottom: 24,
-    shadowColor: '#000',
+    shadowColor: Colors.shadowColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
@@ -53,14 +56,19 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 24,
-    color: '#374151',
+    color: Colors.inputLabel,
   },
   editHeaderTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#111827',
+    color: Colors.blackVarient,
   },
   headerSpacer: {
     width: 32,
+  },
+  backImage: {
+    width: WidthPercentage(8),
+    height: HeightPercentage(5),
+    resizeMode: 'contain',
   },
 });
