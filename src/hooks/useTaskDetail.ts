@@ -7,6 +7,7 @@ import {
 } from '../store/slices/taskSlice';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
+import { sendLocalNotification } from '../utils';
 
 const useTaskDetail = () => {
   const dispatch = useAppDispatch();
@@ -55,6 +56,7 @@ const useTaskDetail = () => {
         dispatch(updateTaskAsync(obj));
       } else {
         dispatch(addTaskAsync(obj));
+        sendLocalNotification(obj);
       }
       navigation.goBack();
     } catch (error) {

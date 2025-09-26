@@ -49,5 +49,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIBackgroundModes</key>
+<array>
+    <string>remote-notification</string>
+</array>
+<key>NSUserNotificationUsageDescription</key>
+<string>Notification to show new task generation</string>
+
 </dict>
 </plist>

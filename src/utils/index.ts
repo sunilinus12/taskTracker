@@ -1,5 +1,10 @@
 import { Dimensions } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import notifee, {
+  AndroidImportance,
+  AuthorizationStatus,
+} from '@notifee/react-native';
+import { Task } from '../components/RenderItemCard';
 
 export const timeConversion = (isoString: any): string => {
   try {
@@ -41,3 +46,32 @@ export const WidthPercentage = (percentage: number) =>
 
 export const HeightPercentage = (percentage: number) =>
   (SCREEN_HEIGHT * percentage) / 100;
+
+export const requestPermission = async () => {
+  const settings = await notifee.requestPermission();
+
+  if (settings.authorizationStatus >= AuthorizationStatus.AUTHORIZED) {
+    console.log('✅ Notification permissions granted.');
+  } else {
+    console.warn('⚠️ Notification permissions denied.');
+  }
+};
+
+export const sendLocalNotification = async (obj: Task) => {
+  await notifee.displayNotification({
+    title: 'Demo Task Created',
+    body: 'Tap to view task details',
+    android: {
+      channelId: 'default',
+      smallIcon: 'ic_launcher', // your icon
+      importance: AndroidImportance.HIGH,
+    },
+    ios: {
+      sound: 'default',
+    },
+    data: {
+      screen: 'TaskDetails',
+      params: JSON.stringify({ task: obj }),
+    },
+  });
+};
