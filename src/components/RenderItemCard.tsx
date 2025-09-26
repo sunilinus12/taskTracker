@@ -193,24 +193,36 @@ const styles = StyleSheet.create({
   },
   highPriority: {
     backgroundColor: Colors.highPriority,
+    borderColor: Colors.highPriorityBorderColor,
+    borderWidth: 1,
   },
   mediumPriority: {
     backgroundColor: Colors.mediumPriority,
+    borderColor: Colors.mediumPriorityBorderColor,
+    borderWidth: 1,
   },
   lowPriority: {
     backgroundColor: Colors.lowPriority,
+    borderColor: Colors.lowPriorityBorderColor,
+    borderWidth: 1,
   },
   defaultPriority: {
     backgroundColor: Colors.defaultPriority,
   },
   completedStatus: {
     backgroundColor: Colors.lowPriority,
+    borderColor: Colors.lowPriorityBorderColor,
+    borderWidth: 1,
   },
   overdueStatus: {
     backgroundColor: Colors.highPriority,
+    borderColor: Colors.highPriorityBorderColor,
+    borderWidth: 1,
   },
   pendingStatus: {
     backgroundColor: Colors.pendingStatus,
+    borderColor: Colors.pendingStatusBorderColor,
+    borderWidth: 1,
   },
   editIcon: {
     backgroundColor: Colors.editIcon,

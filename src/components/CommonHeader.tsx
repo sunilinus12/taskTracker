@@ -34,7 +34,11 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
       <View style={styles.headerTop}>
         <View>
           <Text style={[styles.headerTitle, titleStyle]}>{title}</Text>
-          <Text style={[styles.headerSubtitle, subtitleStyle]}>{subtitle}</Text>
+          {subtitle && (
+            <Text style={[styles.headerSubtitle, subtitleStyle]}>
+              {subtitle}
+            </Text>
+          )}
         </View>
         <TouchableOpacity
           onPress={onPressNotification}
@@ -64,8 +68,9 @@ const styles = StyleSheet.create({
   headerTop: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     marginBottom: 16,
+   
   },
   headerTitle: {
     fontSize: 32,

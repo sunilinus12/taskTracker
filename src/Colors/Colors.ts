@@ -19,5 +19,9 @@ export const Colors= {
  lowDot:'#10B981',
  screenBackgroundColor:"#F9FAFB",
  deleteBackgroundColor:"#FEF2F2",
- deleteBorderColor:"#FECACA"
+ deleteBorderColor:"#FECACA",
+ highPriorityBorderColor:"#d60e0eff",
+ pendingStatusBorderColor:"#0a5cc6ff",
+ lowPriorityBorderColor:"#088745ff",
+ mediumPriorityBorderColor:"#d5ad0aff"
 }

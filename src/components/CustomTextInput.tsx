@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     marginBottom: HeightPercentage(2.4),
   },
   inputLabel: {
-    fontSize: FontScale(12),
+    fontSize: FontScale(13),
     fontWeight: '600',
     color: Colors.inputLabel,
     marginBottom: 8,
@@ -64,8 +64,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: WidthPercentage(2),
     paddingVertical: HeightPercentage(1.2),
-    fontSize: FontScale(10),
+    fontSize: FontScale(13),
     color: Colors.blackVarient,
+    height: 'auto',
+    minHeight: HeightPercentage(5),
   },
   textArea: {
     height: HeightPercentage(12),

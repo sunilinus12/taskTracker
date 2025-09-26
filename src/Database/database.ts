@@ -1,6 +1,6 @@
 import SQLite, { SQLiteDatabase, ResultSet } from 'react-native-sqlite-storage';
 
-SQLite.DEBUG(true);
+// SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
 const databaseConfig = {
