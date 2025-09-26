@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useLayoutEffect } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigation';
@@ -47,10 +47,9 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
       canUpdate: false,
     });
   };
-  return (
-    <View style={styles.container}>
-      <CommonHeader title="Tasks" subtitle="" />
-      {loading ? (
+  const renderList = useMemo(
+    () =>
+      loading ? (
         <LoadingComponent />
       ) : (
         <>
@@ -63,7 +62,13 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
           />
           <FloatingIcon onPress={handleFloatingIconPress} />
         </>
-      )}
+      ),
+    [listTasks, loading, renderCard, keyExtractor, handleFloatingIconPress],
+  );
+  return (
+    <View style={styles.container}>
+      <CommonHeader title="Tasks" subtitle="" />
+      {renderList}
     </View>
   );
 };
