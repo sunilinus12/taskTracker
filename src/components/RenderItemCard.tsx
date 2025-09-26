@@ -7,6 +7,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import { timeConversion } from '../utils';
 
 export type Task = {
   id: string | number;
@@ -47,7 +48,6 @@ const RenderItemCard: React.FC<RenderItemCardProps> = ({ task, onPress }) => {
         return styles.pendingStatus;
     }
   };
-  console.log('item', task.updatedAt);
 
   return (
     <TouchableOpacity
@@ -84,7 +84,9 @@ const RenderItemCard: React.FC<RenderItemCardProps> = ({ task, onPress }) => {
           <View style={styles.taskFooter}>
             <View style={styles.taskTimeRow}>
               <Text style={styles.timeIcon}>🕐</Text>
-              <Text style={styles.taskTime}>{task.updatedAt}</Text>
+              <Text style={styles.taskTime}>
+                {timeConversion(task.updatedAt)}
+              </Text>
             </View>
 
             <View style={styles.taskBadges}>
