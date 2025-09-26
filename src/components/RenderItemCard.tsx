@@ -85,7 +85,7 @@ const RenderItemCard: React.FC<RenderItemCardProps> = ({ task, onPress }) => {
             <View style={styles.taskTimeRow}>
               <Text style={styles.timeIcon}>🕐</Text>
               <Text style={styles.taskTime}>
-                {timeConversion(task.updatedAt)}
+                {timeConversion(task.dueDate)}
               </Text>
             </View>
 

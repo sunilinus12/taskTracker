@@ -7,6 +7,9 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Button,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigation';
@@ -21,6 +24,7 @@ import { priorityOptions, statusOptions } from '../constants';
 import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch } from '../store/hooks';
 import { addTask, removeTask, updateTask } from '../store/slices/taskSlice';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskDetails'>;
 
@@ -37,8 +41,22 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
   const [priority, setPriority] = useState<'high' | 'medium' | 'low'>(
     selectedTask?.priority || 'medium',
   );
-  const [dueDate, setDueDate] = useState(selectedTask?.dueDate || '');
 
+  const [dueDate, setDueDate] = useState(
+    selectedTask?.dueDate ? new Date(selectedTask?.dueDate) : new Date(),
+  );
+  // const [dueDate, setDueDate] = useState<Date | null>(null);
+  const [showPicker, setShowPicker] = useState(false);
+  const onChange = (event: any, selectedDate?: Date) => {
+    setShowPicker(Platform.OS === 'ios'); // Keep open on iOS
+    if (selectedDate) setDueDate(selectedDate);
+  };
+  const formatDate = (date: Date) => {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+      2,
+      '0',
+    )}-${String(date.getDate()).padStart(2, '0')}`;
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -101,13 +119,27 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
           {/* Due Date */}
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>📅 Due Date</Text>
-            <TextInput
-              value={dueDate}
-              onChangeText={setDueDate}
-              placeholder="YYYY-MM-DD"
-              style={styles.textInput}
-              placeholderTextColor="#9CA3AF"
-            />
+            <TouchableOpacity
+              onPress={() => {
+                setShowPicker(true);
+              }}
+            >
+              <TextInput
+                value={dueDate ? dueDate.toLocaleDateString() : 'Select Date'}
+                editable={false}
+                placeholder="YYYY-MM-DD"
+                style={styles.textInput}
+                placeholderTextColor="#9CA3AF"
+              />
+            </TouchableOpacity>
+            {showPicker && (
+              <DateTimePicker
+                value={dueDate || new Date()}
+                mode="date"
+                display="default"
+                onChange={onChange}
+              />
+            )}
           </View>
 
           {/* Action Buttons */}
