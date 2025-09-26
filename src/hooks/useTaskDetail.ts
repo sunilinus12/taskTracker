@@ -7,7 +7,6 @@ import {
 } from '../store/slices/taskSlice';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
-import { Platform } from 'react-native';
 
 const useTaskDetail = () => {
   const dispatch = useAppDispatch();
