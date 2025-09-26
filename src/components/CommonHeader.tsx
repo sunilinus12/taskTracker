@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, ViewStyle, TextStyle } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
+import { Colors } from '../Colors/Colors';
+import { FontScale, WidthPercentage } from '../utils';
 
 type CommonHeaderProps = {
   title?: string;
@@ -42,11 +51,11 @@ export default CommonHeader;
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
     paddingHorizontal: 24,
     paddingTop: 16,
     paddingBottom: 24,
-    shadowColor: '#000',
+    shadowColor: Colors.shadowColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
@@ -61,28 +70,28 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#111827',
+    color: Colors.blackVarient,
   },
   headerSubtitle: {
-    fontSize: 14,
-    color: '#6B7280',
+    fontSize: FontScale(14),
+    color: Colors.grayVarient,
     marginTop: 4,
   },
   notificationButton: {
-    backgroundColor: '#3B82F6',
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    backgroundColor: Colors.blueVarient,
+    width: WidthPercentage(13),
+    height: WidthPercentage(13),
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: Colors.shadowColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 4,
     elevation: 4,
   },
   notificationIcon: {
-    fontSize: 18,
-    color: '#ffffff',
+    fontSize: FontScale(18),
+    color: Colors.white,
   },
 });

@@ -8,6 +8,7 @@ import {
   GestureResponderEvent,
   Dimensions,
 } from 'react-native';
+import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
 
 type FloatingIconProps = {
   onPress: (event: GestureResponderEvent) => void;
@@ -34,16 +35,16 @@ const FloatingIcon: React.FC<FloatingIconProps> = ({
   const dynamicPosition: ViewStyle = {};
 
   if (position.bottomPercent !== undefined) {
-    dynamicPosition.bottom = (SCREEN_HEIGHT * position.bottomPercent) / 100;
+    dynamicPosition.bottom = HeightPercentage(position.bottomPercent);
   }
   if (position.topPercent !== undefined) {
-    dynamicPosition.top = (SCREEN_HEIGHT * position.topPercent) / 100;
+    dynamicPosition.top = HeightPercentage(position.topPercent);
   }
   if (position.rightPercent !== undefined) {
-    dynamicPosition.right = (SCREEN_WIDTH * position.rightPercent) / 100;
+    dynamicPosition.right = WidthPercentage(position.rightPercent);
   }
   if (position.leftPercent !== undefined) {
-    dynamicPosition.left = (SCREEN_WIDTH * position.leftPercent) / 100;
+    dynamicPosition.left = WidthPercentage(position.leftPercent);
   }
 
   return (
@@ -64,19 +65,19 @@ const styles = StyleSheet.create({
   floatingButton: {
     position: 'absolute',
     backgroundColor: '#3B82F6',
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: WidthPercentage(15),
+    height: WidthPercentage(15),
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: HeightPercentage(0.4) },
     shadowOpacity: 0.2,
     shadowRadius: 6,
     elevation: 8,
   },
   floatingButtonText: {
-    fontSize: 24,
+    fontSize: FontScale(24),
     color: '#ffffff',
     fontWeight: '600',
   },

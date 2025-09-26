@@ -2,18 +2,20 @@ import React, { useCallback } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigation';
-import { CommonHeader, FloatingIcon, ListEmptyComponent, RenderItemCard } from '../components';
+import {
+  CommonHeader,
+  FloatingIcon,
+  ListEmptyComponent,
+  RenderItemCard,
+} from '../components';
 import { Task } from '../components/RenderItemCard';
 import { useAppSelector } from '../store/hooks';
+import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const TaskScreen: React.FC<Props> = ({ navigation }) => {
   const { tasks: listTasks } = useAppSelector(e => e.tasks);
-
-
-
-
 
   const renderCard = useCallback(
     ({ item }: { item: Task }) => (
@@ -55,10 +57,14 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9FAFB' },
-  title: { fontSize: 20, fontWeight: 'bold', marginBottom: 16 },
+  title: {
+    fontSize: FontScale(20),
+    fontWeight: 'bold',
+    marginBottom: HeightPercentage(16),
+  },
   flatlistContainer: {
     flexGrow: 1,
-    padding: 10,
+    padding: WidthPercentage(2.5),
   },
 });
 

@@ -7,7 +7,8 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { timeConversion } from '../utils';
+import { FontScale, timeConversion } from '../utils';
+import { Colors } from '../Colors/Colors';
 
 export type Task = {
   id: string | number;
@@ -70,6 +71,7 @@ const RenderItemCard: React.FC<RenderItemCardProps> = ({ task, onPress }) => {
                 styles.taskTitle,
                 task.status === 'completed' && styles.completedTaskTitle,
               ]}
+              numberOfLines={1}
             >
               {task.title}
             </Text>
@@ -112,17 +114,17 @@ export default RenderItemCard;
 
 const styles = StyleSheet.create({
   taskCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
-    shadowColor: '#000',
+    shadowColor: Colors.shadowColor,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 2,
     borderWidth: 1,
-    borderColor: '#F3F4F6',
+    borderColor: Colors.borderVarient,
   },
   taskCardContent: {
     flexDirection: 'row',
@@ -139,22 +141,23 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   statusIcon: {
-    fontSize: 16,
+    fontSize: FontScale(16),
     marginRight: 8,
   },
   taskTitle: {
-    fontSize: 16,
+    fontSize: FontScale(14),
     fontWeight: '600',
-    color: '#111827',
+    color: Colors.blackVarient,
     flex: 1,
+    textTransform: 'capitalize',
   },
   completedTaskTitle: {
-    color: '#6B7280',
+    color: Colors.grayVarient,
     textDecorationLine: 'line-through',
   },
   taskDescription: {
-    fontSize: 14,
-    color: '#6B7280',
+    fontSize: FontScale(12),
+    color: Colors.grayVarient,
     marginBottom: 12,
     lineHeight: 20,
   },
@@ -172,8 +175,8 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   taskTime: {
-    fontSize: 12,
-    color: '#9CA3AF',
+    fontSize: FontScale(10),
+    color: Colors.grayVarient1,
   },
   taskBadges: {
     flexDirection: 'row',
@@ -185,37 +188,37 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   badgeText: {
-    fontSize: 10,
+    fontSize: FontScale(8),
     fontWeight: '600',
     textTransform: 'uppercase',
   },
   highPriority: {
-    backgroundColor: '#FEE2E2',
+    backgroundColor: Colors.highPriority,
   },
   mediumPriority: {
-    backgroundColor: '#FEF3C7',
+    backgroundColor: Colors.mediumPriority,
   },
   lowPriority: {
-    backgroundColor: '#D1FAE5',
+    backgroundColor: Colors.lowPriority,
   },
   defaultPriority: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: Colors.defaultPriority,
   },
   completedStatus: {
-    backgroundColor: '#D1FAE5',
+    backgroundColor: Colors.lowPriority,
   },
   overdueStatus: {
-    backgroundColor: '#FEE2E2',
+    backgroundColor: Colors.highPriority,
   },
   pendingStatus: {
-    backgroundColor: '#DBEAFE',
+    backgroundColor: Colors.pendingStatus,
   },
   editIcon: {
-    backgroundColor: '#EBF8FF',
+    backgroundColor: Colors.editIcon,
     padding: 8,
     borderRadius: 8,
   },
   editIconText: {
-    fontSize: 16,
+    fontSize: FontScale(10),
   },
 });

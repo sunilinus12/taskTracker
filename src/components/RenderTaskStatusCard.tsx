@@ -1,5 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, ViewStyle, TextStyle } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
+import { FontScale, HeightPercentage } from '../utils';
+import { Colors } from '../Colors/Colors';
 
 type StatusOption = {
   label: string;
@@ -35,7 +43,9 @@ const RenderTaskStatusCard: React.FC<RenderTaskStatusCardProps> = ({
         containerStyle,
       ]}
     >
-      {option.icon && <Text style={[styles.statusIcon, iconStyle]}>{option.icon}</Text>}
+      {option.icon && (
+        <Text style={[styles.statusIcon, iconStyle]}>{option.icon}</Text>
+      )}
       <Text
         style={[
           styles.statusLabel,
@@ -54,28 +64,28 @@ export default RenderTaskStatusCard;
 const styles = StyleSheet.create({
   statusCard: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
     borderWidth: 2,
-    borderColor: '#D1D5DB',
+    borderColor: Colors.borderVarient1,
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
   },
   statusCardActive: {
-    borderColor: '#3B82F6',
-    backgroundColor: '#EBF8FF',
+    borderColor: Colors.blueVarient,
+    backgroundColor: Colors.editIcon,
   },
   statusIcon: {
-    fontSize: 16,
+    fontSize: FontScale(14),
     marginBottom: 8,
   },
   statusLabel: {
-    fontSize: 12,
+    fontSize: FontScale(11),
     fontWeight: '500',
-    color: '#6B7280',
-    marginTop: 8,
+    color: Colors.grayVarient1,
+    marginTop: HeightPercentage(0.8),
   },
   statusLabelActive: {
-    color: '#3B82F6',
+    color: Colors.blueVarient,
   },
 });

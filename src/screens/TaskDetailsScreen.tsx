@@ -21,6 +21,8 @@ import {
 import { priorityOptions, statusOptions } from '../constants';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useTaskDetail } from '../hooks';
+import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
+import { Colors } from '../Colors/Colors';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskDetails'>;
 
@@ -126,22 +128,20 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
 
           {/* Action Buttons */}
           <View style={styles.actionButtons}>
-            <View style={styles.actionButtons}>
-              <CommonButton
-                title={canUpdate ? 'Update Task' : 'Create Task'}
-                onPress={handleTask}
-                type="save"
-                disabled={!title.trim()}
-              />
+            <CommonButton
+              title={canUpdate ? 'Update Task' : 'Create Task'}
+              onPress={handleTask}
+              type="save"
+              disabled={!title.trim()}
+            />
 
-              {canUpdate && (
-                <CommonButton
-                  title="🗑️ Delete Task"
-                  onPress={handleDeleteTask}
-                  type="delete"
-                />
-              )}
-            </View>
+            {canUpdate && (
+              <CommonButton
+                title="🗑️ Delete Task"
+                onPress={handleDeleteTask}
+                type="delete"
+              />
+            )}
           </View>
         </ScrollView>
       </View>
@@ -150,15 +150,15 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F9FAFB' },
+  container: { flex: 1, backgroundColor: Colors.screenBackgroundColor },
   inputGroup: {
-    marginBottom: 24,
+    marginBottom: HeightPercentage(4),
   },
   editForm: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 24,
-    paddingBlock: 24,
+    paddingHorizontal: WidthPercentage(4),
+    paddingTop: HeightPercentage(2),
+    paddingBlock: HeightPercentage(2.4),
   },
 
   statusGrid: {
@@ -171,27 +171,27 @@ const styles = StyleSheet.create({
   },
 
   actionButtons: {
-    marginTop: 32,
+    marginTop: HeightPercentage(3.2),
     marginBottom: 40,
     gap: 16,
   },
 
   inputLabel: {
-    fontSize: 14,
+    fontSize: FontScale(14),
     fontWeight: '600',
-    color: '#374151',
+    color: Colors.inputLabel,
     marginBottom: 8,
   },
 
   textInput: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
     borderWidth: 1,
-    borderColor: '#D1D5DB',
+    borderColor: Colors.borderVarient1,
     borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    color: '#111827',
+    paddingHorizontal: WidthPercentage(2),
+    paddingVertical: HeightPercentage(1.2),
+    fontSize: FontScale(12),
+    color: Colors.blackVarient,
   },
 });
 

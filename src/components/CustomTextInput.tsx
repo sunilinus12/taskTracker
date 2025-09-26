@@ -7,6 +7,8 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native';
+import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
+import { Colors } from '../Colors/Colors';
 
 type CustomTextInputProps = {
   label: string;
@@ -37,7 +39,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         style={[styles.textInput, multiline && styles.textArea, inputStyle]}
         multiline={multiline}
         textAlignVertical={multiline ? 'top' : 'center'}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor={Colors.grayVarient}
       />
     </View>
   );
@@ -47,26 +49,26 @@ export default CustomTextInput;
 
 const styles = StyleSheet.create({
   inputGroup: {
-    marginBottom: 24,
+    marginBottom: HeightPercentage(2.4),
   },
   inputLabel: {
-    fontSize: 14,
+    fontSize: FontScale(12),
     fontWeight: '600',
-    color: '#374151',
+    color: Colors.inputLabel,
     marginBottom: 8,
   },
   textInput: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
     borderWidth: 1,
-    borderColor: '#D1D5DB',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    color: '#111827',
+    borderColor: Colors.borderVarient1,
+    borderRadius: 10,
+    paddingHorizontal: WidthPercentage(2),
+    paddingVertical: HeightPercentage(1.2),
+    fontSize: FontScale(10),
+    color: Colors.blackVarient,
   },
   textArea: {
-    height: 120,
+    height: HeightPercentage(12),
     textAlignVertical: 'top',
   },
 });

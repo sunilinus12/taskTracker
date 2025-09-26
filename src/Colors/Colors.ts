@@ -1,0 +1,23 @@
+export const Colors= {
+ white:'#ffffff',
+ blackVarient:'#111827',
+ blueVarient:'#3B82F6'  ,
+ shadowColor:'#000' ,
+ grayVarient:'#6B7280',
+ borderVarient:'#F3F4F6',
+ grayVarient1:'#9CA3AF',
+ highPriority:'#FEE2E2',
+ mediumPriority:'#FEF3C7',
+ lowPriority:'#D1FAE5',
+ defaultPriority:'#F3F4F6',
+ pendingStatus:'#DBEAFE',
+ editIcon:'#EBF8FF',
+ inputLabel:'#374151',
+ borderVarient1:'#D1D5DB',
+ highDot:'#EF4444',
+ mediumDot:'#F59E0B',
+ lowDot:'#10B981',
+ screenBackgroundColor:"#F9FAFB",
+ deleteBackgroundColor:"#FEF2F2",
+ deleteBorderColor:"#FECACA"
+}

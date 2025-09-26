@@ -7,6 +7,8 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import { FontScale, WidthPercentage } from '../utils';
+import { Colors } from '../Colors/Colors';
 
 export type PriorityOption = {
   label: string;
@@ -96,16 +98,16 @@ export default RenderPriorityCard;
 
 const styles = StyleSheet.create({
   priorityCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.white,
     borderWidth: 2,
-    borderColor: '#D1D5DB',
+    borderColor: Colors.borderVarient1,
     borderRadius: 12,
     padding: 16,
     marginVertical: 6,
   },
   priorityCardActive: {
-    borderColor: '#3B82F6',
-    backgroundColor: '#EBF8FF',
+    borderColor: Colors.blueVarient,
+    backgroundColor: Colors.editIcon,
   },
   priorityCardContent: {
     gap: 8,
@@ -120,44 +122,44 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   priorityDot: {
-    width: 12,
-    height: 12,
+    width: WidthPercentage(2.5),
+    height: WidthPercentage(2.5),
     borderRadius: 6,
-    marginRight: 12,
+    marginRight: WidthPercentage(3),
   },
   highDot: {
-    backgroundColor: '#EF4444',
+    backgroundColor: Colors.highDot,
   },
   mediumDot: {
-    backgroundColor: '#F59E0B',
+    backgroundColor: Colors.mediumDot,
   },
   lowDot: {
-    backgroundColor: '#10B981',
+    backgroundColor: Colors.lowDot,
   },
   defaultDot: {
-    backgroundColor: '#D1D5DB',
+    backgroundColor: Colors.borderVarient1,
   },
   priorityLabel: {
-    fontSize: 16,
+    fontSize: FontScale(13),
     fontWeight: '600',
-    color: '#111827',
+    color: Colors.blackVarient,
   },
   priorityDescription: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginLeft: 24,
+    fontSize: FontScale(10),
+    color: Colors.grayVarient,
+    marginLeft: WidthPercentage(5),
   },
   highPriority: {
-    backgroundColor: '#FEE2E2',
+    backgroundColor: Colors.highPriority,
   },
   mediumPriority: {
-    backgroundColor: '#FEF3C7',
+    backgroundColor: Colors.mediumPriority,
   },
   lowPriority: {
-    backgroundColor: '#D1FAE5',
+    backgroundColor: Colors.lowPriority,
   },
   defaultPriority: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: Colors.defaultPriority,
   },
   badge: {
     paddingHorizontal: 8,
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   badgeText: {
-    fontSize: 10,
+    fontSize: FontScale(8),
     fontWeight: '600',
     textTransform: 'uppercase',
   },

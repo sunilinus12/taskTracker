@@ -6,6 +6,8 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
+import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
+import { Colors } from '../Colors/Colors';
 
 type CommonButtonProps = {
   title: string;
@@ -55,35 +57,35 @@ export default CommonButton;
 
 const styles = StyleSheet.create({
   saveButton: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: Colors.blueVarient,
     borderRadius: 12,
-    paddingVertical: 16,
+    paddingVertical: HeightPercentage(1.6),
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: Colors.shadowColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 4,
   },
   saveButtonDisabled: {
-    backgroundColor: '#D1D5DB',
+    backgroundColor: Colors.borderVarient1,
   },
   saveButtonText: {
-    fontSize: 16,
+    fontSize: FontScale(14),
     fontWeight: '600',
-    color: '#ffffff',
+    color: Colors.white,
   },
   deleteButton: {
-    backgroundColor: '#FEF2F2',
+    backgroundColor: Colors.deleteBackgroundColor,
     borderWidth: 1,
-    borderColor: '#FECACA',
+    borderColor: Colors.deleteBorderColor,
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: 'center',
   },
   deleteButtonText: {
-    fontSize: 16,
+    fontSize: FontScale(14),
     fontWeight: '600',
-    color: '#EF4444',
+    color: Colors.highDot,
   },
 });
