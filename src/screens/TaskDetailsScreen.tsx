@@ -45,18 +45,12 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
   const [dueDate, setDueDate] = useState(
     selectedTask?.dueDate ? new Date(selectedTask?.dueDate) : new Date(),
   );
-  // const [dueDate, setDueDate] = useState<Date | null>(null);
   const [showPicker, setShowPicker] = useState(false);
   const onChange = (event: any, selectedDate?: Date) => {
     setShowPicker(Platform.OS === 'ios'); // Keep open on iOS
     if (selectedDate) setDueDate(selectedDate);
   };
-  const formatDate = (date: Date) => {
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
-      2,
-      '0',
-    )}-${String(date.getDate()).padStart(2, '0')}`;
-  };
+  
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

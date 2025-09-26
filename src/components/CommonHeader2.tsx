@@ -16,7 +16,7 @@ const CommonHeader2: React.FC<CommonHeader2Props> = ({
     <View style={styles.header}>
       <View style={styles.editHeader}>
         <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-          <Text style={styles.backButtonText}>←</Text>
+          <Text style={styles.backButtonText}>{`\u2190`}</Text>
         </TouchableOpacity>
 
         <Text style={styles.editHeaderTitle}>
