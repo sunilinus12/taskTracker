@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { TaskDetailsScreen, TaskScreen } from '../screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Task } from '../components/RenderItemCard';
-import { useNotificationListener } from '../hooks/useNotificationListener';
+import { useNotificationListener } from '../hooks';
 
 export type RootStackParamList = {
   Home: undefined; // no params

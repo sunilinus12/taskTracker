@@ -5,7 +5,7 @@ import { requestPermission } from '../utils';
 import Toast from 'react-native-toast-message';
 import { Alert } from 'react-native';
 
-export const useNotificationListener = () => {
+ const useNotificationListener = () => {
   const handleNotification = (data?: any) => {
     try {
       if (!data) return;
@@ -61,3 +61,5 @@ export const useNotificationListener = () => {
     handleNotification,
   };
 };
+
+export default useNotificationListener
