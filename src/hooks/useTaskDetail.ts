@@ -107,6 +107,9 @@ const useTaskDetail = () => {
   const handleOpenCalender = useCallback(() => {
     setShowPicker(true);
   }, []);
+   const handleCloseCalender = useCallback(() => {
+    setShowPicker(false);
+  }, []);
 
   return {
     title,
@@ -123,6 +126,7 @@ const useTaskDetail = () => {
     onChangeDatePickerValue,
     handleTask,
     handleDeleteTask,
+    handleCloseCalender
   };
 };
 

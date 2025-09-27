@@ -8,6 +8,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableOpacity,
+  Pressable,
+  Modal,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigation';
@@ -43,6 +45,7 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
     onChangeDatePickerValue,
     handleTask,
     handleDeleteTask,
+    handleCloseCalender,
   } = useTaskDetail();
 
   return (
@@ -107,25 +110,47 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
           {/* Due Date */}
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>📅 Due Date</Text>
-            <TouchableOpacity onPress={handleOpenCalender}>
+            <Pressable
+              onPress={handleOpenCalender}
+              style={{  flex: 1 }}
+            >
               <TextInput
                 value={dueDate ? dueDate.toLocaleDateString() : 'Select Date'}
                 editable={false}
                 placeholder="YYYY-MM-DD"
                 style={styles.textInput}
                 placeholderTextColor="#9CA3AF"
+                pointerEvents="none"
               />
-            </TouchableOpacity>
-            {showPicker && (
-              <DateTimePicker
-                minimumDate={new Date()}
-                value={dueDate || new Date()}
-                mode="date"
-                display="default"
-                onChange={onChangeDatePickerValue}
-              />
-            )}
+            </Pressable>
           </View>
+
+          {showPicker && (
+            <Modal
+              visible={showPicker}
+              transparent
+              animationType="slide"
+              onRequestClose={handleCloseCalender}
+            >
+              <View style={styles.modalBackground}>
+                <View style={styles.pickerWrapper}>
+                  <DateTimePicker
+                    minimumDate={new Date()}
+                    value={dueDate || new Date()}
+                    mode="date"
+                    display="spinner"
+                    onChange={onChangeDatePickerValue}
+                    style={{ width: '100%' }}
+                  />
+                  <CommonButton
+                    style={{ marginHorizontal: WidthPercentage(10) }}
+                    title="Done"
+                    onPress={handleCloseCalender}
+                  />
+                </View>
+              </View>
+            </Modal>
+          )}
 
           {/* Action Buttons */}
           <View style={styles.actionButtons}>
@@ -193,6 +218,25 @@ const styles = StyleSheet.create({
     paddingVertical: HeightPercentage(1.2),
     fontSize: FontScale(12),
     color: Colors.blackVarient,
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pickerWrapper: {
+    backgroundColor: '#fff',
+    paddingBottom: 20,
+    borderRadius: 20,
+  },
+  doneButton: {
+    backgroundColor: '#007AFF',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 10,
+    marginTop: 10,
+    marginHorizontal: 20,
   },
 });
 
