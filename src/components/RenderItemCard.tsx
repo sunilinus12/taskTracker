@@ -48,7 +48,17 @@ const RenderItemCard: React.FC<RenderItemCardProps> = ({ task, onPress }) => {
         return styles.pendingStatus;
     }
   };
-
+  const getStatusIconColor = task => {
+    try {
+      return task.status == 'completed'
+        ? 'green'
+        : task.status == 'overdue'
+        ? 'red'
+        : 'black';
+    } catch (error) {
+      return 'black';
+    }
+  };
   return (
     <TouchableOpacity
       key={task.id}
@@ -58,7 +68,14 @@ const RenderItemCard: React.FC<RenderItemCardProps> = ({ task, onPress }) => {
       <View style={styles.taskCardContent}>
         <View style={styles.taskInfo}>
           <View style={styles.taskTitleRow}>
-            <Text style={styles.statusIcon}>
+            <Text
+              style={[
+                styles.statusIcon,
+                {
+                  color: getStatusIconColor(task),
+                },
+              ]}
+            >
               {task.status === 'completed'
                 ? '✓'
                 : task.status === 'overdue'
