@@ -15,8 +15,6 @@ import {
 import { AppNavigation, navigationRef } from './src/navigation';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
-import { useEffect } from 'react';
-import { requestPermission } from './src/utils';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNotificationListener } from './src/hooks/useNotificationListener';

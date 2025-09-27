@@ -33,9 +33,12 @@ export const useNotificationListener = () => {
     }
   };
   useEffect(() => {
-    requestPermission();
-    createChannel();
-    checkInitialNotification();
+    const initNotifications = async () => {
+      await requestPermission();
+      await createChannel();
+      await checkInitialNotification();
+    };
+    initNotifications();
     const unsubscribeForeground = notifee.onForegroundEvent(
       async ({ type, detail }) => {
         console.log('data come', type, detail);
