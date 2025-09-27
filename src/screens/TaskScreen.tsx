@@ -1,29 +1,32 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigation';
 import {
   CommonHeader,
+  CustomTextInput,
   FloatingIcon,
   ListEmptyComponent,
   LoadingComponent,
   RenderItemCard,
 } from '../components';
 import { Task } from '../components/RenderItemCard';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
-import { loadTasks } from '../store/slices/taskSlice';
+import { useTask } from '../hooks';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 const TaskScreen: React.FC<Props> = ({ navigation }) => {
-  const dispatch = useAppDispatch();
-  const { tasks: listTasks, loading } = useAppSelector(e => e.tasks);
+  const { onChangeText, search, filterList, loading, listTasks } = useTask();
 
-  useLayoutEffect(() => {
-    dispatch(loadTasks());
-  }, []);
 
+  
   const renderCard = useCallback(
     ({ item }: { item: Task }) => (
       <RenderItemCard
@@ -53,14 +56,20 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
         <LoadingComponent />
       ) : (
         <>
+          <CustomTextInput
+            value={search}
+            placeholder="🔍 Search tasks..."
+            onChangeText={onChangeText}
+            style={styles.searchContainer}
+          />
           <FlatList
             contentContainerStyle={styles.flatlistContainer}
-            data={listTasks as Task[]}
+            data={search ? filterList : (listTasks as Task[])}
             keyExtractor={keyExtractor}
             renderItem={renderCard}
             ListEmptyComponent={ListEmptyComponent}
           />
-          <FloatingIcon onPress={handleFloatingIconPress} />
+          {!search && <FloatingIcon onPress={handleFloatingIconPress} />}
         </>
       ),
     [listTasks, loading, renderCard, keyExtractor, handleFloatingIconPress],
@@ -68,6 +77,7 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <CommonHeader title="Tasks" subtitle="" />
+
       {renderList}
     </View>
   );
@@ -83,6 +93,10 @@ const styles = StyleSheet.create({
   flatlistContainer: {
     flexGrow: 1,
     padding: WidthPercentage(2.5),
+  },
+  searchContainer: {
+    marginHorizontal: WidthPercentage(3),
+    marginTop: HeightPercentage(2),
   },
 });
 

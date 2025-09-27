@@ -1,3 +1,4 @@
 import useTaskDetail from './useTaskDetail';
+import useTask from './useTask';
 
-export { useTaskDetail };
+export { useTaskDetail, useTask };

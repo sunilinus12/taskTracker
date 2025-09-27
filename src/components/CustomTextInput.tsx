@@ -11,7 +11,7 @@ import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
 import { Colors } from '../Colors/Colors';
 
 type CustomTextInputProps = {
-  label: string;
+  label?: string;
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
@@ -31,7 +31,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
 }) => {
   return (
     <View style={[styles.inputGroup, style]}>
-      <Text style={styles.inputLabel}>{label}</Text>
+      {label && <Text style={styles.inputLabel}>{label}</Text>}
       <TextInput
         value={value}
         onChangeText={onChangeText}
