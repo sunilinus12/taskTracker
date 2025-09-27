@@ -95,6 +95,12 @@ const useTaskDetail = () => {
     try {
       if(selectedTask)
       dispatch(removeTaskAsync(selectedTask?.id.toString()));
+    Toast.show({
+          type: 'success',
+          text1: 'Task deleted successfully ✅',
+          position: 'top',
+          visibilityTime: 2500,
+        });
       navigation.goBack();
     } catch (error) {}
   }, [selectedTask]);
