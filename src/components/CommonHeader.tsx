@@ -8,7 +8,8 @@ import {
   TextStyle,
 } from 'react-native';
 import { Colors } from '../Colors/Colors';
-import { FontScale, WidthPercentage } from '../utils';
+import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
+import CustomTextInput from './CustomTextInput';
 
 type CommonHeaderProps = {
   title?: string;
@@ -18,6 +19,10 @@ type CommonHeaderProps = {
   containerStyle?: ViewStyle;
   titleStyle?: TextStyle;
   subtitleStyle?: TextStyle;
+  showSearchField?: boolean;
+  onSearchTextChange?: (e: string) => void;
+  searchValue?: string;
+  searchPlaceholder?: string;
 };
 
 const CommonHeader: React.FC<CommonHeaderProps> = ({
@@ -28,26 +33,40 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
   containerStyle,
   titleStyle,
   subtitleStyle,
+  showSearchField = false,
+  searchValue,
+  onSearchTextChange,
+  searchPlaceholder,
 }) => {
   return (
-    <View style={[styles.header, containerStyle]}>
-      <View style={styles.headerTop}>
-        <View>
-          <Text style={[styles.headerTitle, titleStyle]}>{title}</Text>
-          {subtitle && (
-            <Text style={[styles.headerSubtitle, subtitleStyle]}>
-              {subtitle}
-            </Text>
-          )}
+    <>
+      <View style={[styles.header, containerStyle]}>
+        <View style={styles.headerTop}>
+          <View>
+            <Text style={[styles.headerTitle, titleStyle]}>{title}</Text>
+            {subtitle && (
+              <Text style={[styles.headerSubtitle, subtitleStyle]}>
+                {subtitle}
+              </Text>
+            )}
+          </View>
+          <TouchableOpacity
+            onPress={onPressNotification}
+            style={styles.notificationButton}
+          >
+            <Text style={styles.notificationIcon}>{notificationIcon}</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={onPressNotification}
-          style={styles.notificationButton}
-        >
-          <Text style={styles.notificationIcon}>{notificationIcon}</Text>
-        </TouchableOpacity>
+        {showSearchField && onSearchTextChange && (
+          <CustomTextInput
+            value={searchValue ?? ''}
+            placeholder={searchPlaceholder}
+            onChangeText={onSearchTextChange}
+            style={styles.searchContainer}
+          />
+        )}
       </View>
-    </View>
+    </>
   );
 };
 
@@ -57,8 +76,8 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: Colors.white,
     paddingHorizontal: 24,
-    paddingTop: 16,
-    paddingBottom: 24,
+    paddingTop: HeightPercentage(2),
+    paddingBottom: HeightPercentage(2),
     shadowColor: Colors.shadowColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -70,7 +89,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     marginBottom: 16,
-   
   },
   headerTitle: {
     fontSize: 32,
@@ -98,5 +116,8 @@ const styles = StyleSheet.create({
   notificationIcon: {
     fontSize: FontScale(18),
     color: Colors.white,
+  },
+  searchContainer: {
+    marginTop: HeightPercentage(2),
   },
 });

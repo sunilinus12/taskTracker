@@ -25,8 +25,6 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 const TaskScreen: React.FC<Props> = ({ navigation }) => {
   const { onChangeText, search, filterList, loading, listTasks } = useTask();
 
-
-  
   const renderCard = useCallback(
     ({ item }: { item: Task }) => (
       <RenderItemCard
@@ -56,12 +54,6 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
         <LoadingComponent />
       ) : (
         <>
-          <CustomTextInput
-            value={search}
-            placeholder="🔍 Search tasks..."
-            onChangeText={onChangeText}
-            style={styles.searchContainer}
-          />
           <FlatList
             contentContainerStyle={styles.flatlistContainer}
             data={search ? filterList : (listTasks as Task[])}
@@ -76,7 +68,14 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
   );
   return (
     <View style={styles.container}>
-      <CommonHeader title="Tasks" subtitle="" />
+      <CommonHeader
+        title="Tasks"
+        subtitle=""
+        showSearchField={true}
+        searchValue={search}
+        searchPlaceholder="🔍 Search tasks..."
+        onSearchTextChange={onChangeText}
+      />
 
       {renderList}
     </View>
