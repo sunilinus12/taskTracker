@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { navigationRef } from '../navigation';
 import { requestPermission } from '../utils';
-import Toast from 'react-native-toast-message';
-import { Alert, Linking } from 'react-native';
+import { Alert } from 'react-native';
 
 const useNotificationListener = () => {
   const handleNotification = (data?: any) => {
@@ -11,11 +10,14 @@ const useNotificationListener = () => {
       if (!data) return;
       const screen = data.screen;
       const params = data.params ? JSON.parse(data.params) : {};
-      navigationRef.current?.navigate(screen, {
-        task: { ...params.task },
-        canUpdate: true,
-        taskId: params.id,
-      });
+
+      if (navigationRef.current?.isReady()) {
+        navigationRef.current.navigate(screen, {
+          task: { ...params.task },
+          canUpdate: true,
+          taskId: params.id,
+        });
+      }
     } catch (error) {
       console.error('error from', handleNotification);
     }
