@@ -39,7 +39,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
   searchValue,
   onSearchTextChange,
   searchPlaceholder,
-  filterBtnDisable = true,
+  filterBtnDisable = false,
 }) => {
   return (
     <>
@@ -68,13 +68,15 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
             style={styles.searchContainer}
           />
         )}
-        <CommonButton
-          title=" Filters"
-          onPress={() => {}}
-          enableDisableScheme={false}
-          style={styles.selectedFilter}
-          textStyle={{ ...styles.selectedTextStyle }}
-        />
+        {filterBtnDisable && (
+          <CommonButton
+            title=" Filters"
+            onPress={() => {}}
+            enableDisableScheme={false}
+            style={styles.selectedFilter}
+            textStyle={{ ...styles.selectedTextStyle }}
+          />
+        )}
       </View>
     </>
   );
