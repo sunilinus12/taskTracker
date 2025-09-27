@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { sendLocalNotification } from '../utils';
 import Toast from 'react-native-toast-message';
 import { Keyboard } from 'react-native';
+import { Task } from '../components/RenderItemCard';
 
 const useTaskDetail = () => {
   const dispatch = useAppDispatch();
@@ -17,9 +18,17 @@ const useTaskDetail = () => {
   const { tasks: listTasks, loading } = useAppSelector(e => e.tasks);
 
   const route = useRoute();
-  const { task, canUpdate = false } = route?.params ?? {};
-  const selectedTask = listTasks.find(e => e.id == task);
-  
+  const {
+    task,
+    taskId,
+    canUpdate = false,
+  } = route?.params as {
+    task: Task;
+    taskId: number | string;
+    canUpdate: boolean;
+  };
+  const selectedTask = task ? task : listTasks.find(e => e.id == taskId);
+
   const [title, setTitle] = useState(selectedTask?.title || '');
   const [description, setDescription] = useState(
     selectedTask?.description || '',

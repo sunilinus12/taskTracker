@@ -12,8 +12,9 @@ const useNotificationListener = () => {
       const screen = data.screen;
       const params = data.params ? JSON.parse(data.params) : {};
       navigationRef.current?.navigate(screen, {
-        taskId: { ...params.task },
+        task: { ...params.task },
         canUpdate: true,
+        taskId: params.id,
       });
     } catch (error) {
       console.error('error from', handleNotification);
@@ -40,11 +41,6 @@ const useNotificationListener = () => {
       await createChannel();
       await checkInitialNotification();
     };
-    Linking.getInitialURL().then(url => {
-      if (url) {
-        console.log('Initial URL:', url);
-      }
-    });
     initNotifications();
     const unsubscribeForeground = notifee.onForegroundEvent(
       async ({ type, detail }) => {

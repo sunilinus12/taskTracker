@@ -1,16 +1,9 @@
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigation';
 import {
   CommonHeader,
-  CustomTextInput,
   FloatingIcon,
   ListEmptyComponent,
   LoadingComponent,
@@ -31,8 +24,9 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
         task={item}
         onPress={() =>
           navigation.navigate('TaskDetails', {
-            task: item.id,
+            task: item,
             canUpdate: true,
+            taskId: item?.id,
           })
         }
       />

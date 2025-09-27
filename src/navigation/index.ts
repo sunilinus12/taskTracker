@@ -7,6 +7,7 @@ export const linking = {
     screens: {
       Home: '',
       TaskDetails: 'task/:taskId',
+      
     },
   },
 };
