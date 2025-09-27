@@ -17,8 +17,8 @@ import { Provider } from 'react-redux';
 import { store } from './src/store';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { useNotificationListener } from './src/hooks/useNotificationListener';
 import Toast from 'react-native-toast-message';
+import { useNotificationListener } from './src/hooks';
 
 function App() {
   const { handleNotification } = useNotificationListener();
@@ -39,7 +39,7 @@ function App() {
           <NavigationContainer ref={navigationRef}>
             <AppNavigation />
           </NavigationContainer>
-           <Toast />
+          <Toast />
         </SafeAreaView>
       </SafeAreaProvider>
     </Provider>
