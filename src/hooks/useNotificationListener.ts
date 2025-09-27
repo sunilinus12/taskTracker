@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { navigationRef } from '../navigation';
 import { requestPermission } from '../utils';
+import Toast from 'react-native-toast-message';
+import { Alert } from 'react-native';
 
 export const useNotificationListener = () => {
   const handleNotification = (data?: any) => {
@@ -41,8 +43,9 @@ export const useNotificationListener = () => {
     initNotifications();
     const unsubscribeForeground = notifee.onForegroundEvent(
       async ({ type, detail }) => {
-        console.log('data come', type, detail);
-
+        if (type == EventType.DELIVERED) {
+          Alert.alert('Notification Received', 'You have a new message');
+        }
         if (type === EventType.PRESS) {
           handleNotification(detail.notification?.data);
         }

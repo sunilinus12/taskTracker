@@ -60,18 +60,19 @@ const useTaskDetail = () => {
         Toast.show({
           text1: 'Task updated successfully ✏️',
           type: 'success',
-          position: 'bottom',
+          position: 'top',
         });
       } else {
         dispatch(addTaskAsync(obj));
         sendLocalNotification(obj);
-      }
-      Toast.show({
+         Toast.show({
         type: 'success',
         text1: 'Task created successfully ✅',
-        position: 'bottom',
+        position: 'top',
         visibilityTime: 2500,
       });
+      }
+     
 
       navigation.goBack();
     } catch (error) {
