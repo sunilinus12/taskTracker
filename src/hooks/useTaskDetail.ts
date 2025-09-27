@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { useAppDispatch } from '../store/hooks';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   addTaskAsync,
   removeTaskAsync,
@@ -14,9 +14,12 @@ import { Keyboard } from 'react-native';
 const useTaskDetail = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
-  const route = useRoute();
-  const { task: selectedTask = [], canUpdate = false } = route?.params ?? {};
+  const { tasks: listTasks, loading } = useAppSelector(e => e.tasks);
 
+  const route = useRoute();
+  const { task, canUpdate = false } = route?.params ?? {};
+  const selectedTask = listTasks.find(e => e.id == task);
+  
   const [title, setTitle] = useState(selectedTask?.title || '');
   const [description, setDescription] = useState(
     selectedTask?.description || '',
@@ -24,9 +27,9 @@ const useTaskDetail = () => {
   const [status, setStatus] = useState<
     'completed' | 'overdue' | 'pending' | string
   >(selectedTask?.status || 'pending');
-  const [priority, setPriority] = useState<'high' | 'medium' | 'low'>(
-    selectedTask?.priority || 'medium',
-  );
+  const [priority, setPriority] = useState<
+    'high' | 'medium' | 'low' | 'default'
+  >(selectedTask?.priority || 'medium');
 
   const [dueDate, setDueDate] = useState(
     selectedTask?.dueDate ? new Date(selectedTask?.dueDate) : new Date(),
@@ -65,14 +68,13 @@ const useTaskDetail = () => {
       } else {
         dispatch(addTaskAsync(obj));
         sendLocalNotification(obj);
-         Toast.show({
-        type: 'success',
-        text1: 'Task created successfully ✅',
-        position: 'top',
-        visibilityTime: 2500,
-      });
+        Toast.show({
+          type: 'success',
+          text1: 'Task created successfully ✅',
+          position: 'top',
+          visibilityTime: 2500,
+        });
       }
-     
 
       navigation.goBack();
     } catch (error) {

@@ -4,15 +4,19 @@
  *
  * @format
  */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  useColorScheme,
+  View,
+} from 'react-native';
 import {
   SafeAreaProvider,
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import { AppNavigation, navigationRef } from './src/navigation';
+import { AppNavigation, linking, navigationRef } from './src/navigation';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
@@ -36,7 +40,7 @@ function App() {
       <SafeAreaProvider>
         <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
           <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-          <NavigationContainer ref={navigationRef}>
+          <NavigationContainer ref={navigationRef} linking={linking}>
             <AppNavigation />
           </NavigationContainer>
           <Toast />

@@ -5,8 +5,9 @@ import { Task } from '../components/RenderItemCard';
 
 export type RootStackParamList = {
   Home: undefined; // no params
-  TaskDetails: { task?: Task | undefined; canUpdate: boolean };
+  TaskDetails: { task?: number|string; canUpdate: boolean };
 };
+
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

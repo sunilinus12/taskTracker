@@ -3,9 +3,9 @@ import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { navigationRef } from '../navigation';
 import { requestPermission } from '../utils';
 import Toast from 'react-native-toast-message';
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 
- const useNotificationListener = () => {
+const useNotificationListener = () => {
   const handleNotification = (data?: any) => {
     try {
       if (!data) return;
@@ -40,6 +40,11 @@ import { Alert } from 'react-native';
       await createChannel();
       await checkInitialNotification();
     };
+    Linking.getInitialURL().then(url => {
+      if (url) {
+        console.log('Initial URL:', url);
+      }
+    });
     initNotifications();
     const unsubscribeForeground = notifee.onForegroundEvent(
       async ({ type, detail }) => {
@@ -62,4 +67,4 @@ import { Alert } from 'react-native';
   };
 };
 
-export default useNotificationListener
+export default useNotificationListener;

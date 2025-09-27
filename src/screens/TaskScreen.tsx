@@ -31,7 +31,7 @@ const TaskScreen: React.FC<Props> = ({ navigation }) => {
         task={item}
         onPress={() =>
           navigation.navigate('TaskDetails', {
-            task: item,
+            task: item.id,
             canUpdate: true,
           })
         }
