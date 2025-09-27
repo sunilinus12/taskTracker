@@ -9,7 +9,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
 import { sendLocalNotification } from '../utils';
 import Toast from 'react-native-toast-message';
-import { Keyboard } from 'react-native';
+import { Keyboard, Platform } from 'react-native';
 import { Task } from '../components/RenderItemCard';
 
 const useTaskDetail = () => {
@@ -46,8 +46,8 @@ const useTaskDetail = () => {
   const [showPicker, setShowPicker] = useState(false);
   const onChangeDatePickerValue = useCallback(
     (event: any, selectedDate?: Date) => {
-      // setShowPicker(Platform.OS === 'ios');
-      setShowPicker(false);
+      setShowPicker(true);
+      // setShowPicker(false);
       if (selectedDate) setDueDate(selectedDate);
     },
     [],
