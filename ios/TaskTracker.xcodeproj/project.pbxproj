@@ -191,9 +191,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TaskTracker/Pods-TaskTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TaskTracker/Pods-TaskTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -230,9 +234,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TaskTracker/Pods-TaskTracker-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-TaskTracker/Pods-TaskTracker-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -274,6 +282,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "-key-CFBundleURLTypes--key---array-------dict-----------key-CFBundleURLName--key-----------string-tasktracker--string-----------key-CFBundleURLSchemes--key-----------array---------------string-tasktracker--string------------array--------dict----array---key-CFBundleURLTypes--key---array-------dict-----------key-CFBundleURLName--key-----------string-tasktracker--string-----------key-CFBundleURLSchemes--key-----------array---------------string-tasktracker--string------------array--------dict----array--com.sunil.tasktracker";
 				PRODUCT_NAME = TaskTracker;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -301,6 +310,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "-key-CFBundleURLTypes--key---array-------dict-----------key-CFBundleURLName--key-----------string-tasktracker--string-----------key-CFBundleURLSchemes--key-----------array---------------string-tasktracker--string------------array--------dict----array---key-CFBundleURLTypes--key---array-------dict-----------key-CFBundleURLName--key-----------string-tasktracker--string-----------key-CFBundleURLSchemes--key-----------array---------------string-tasktracker--string------------array--------dict----array--com.sunil.tasktracker";
 				PRODUCT_NAME = TaskTracker;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
