@@ -93,6 +93,7 @@ const useTaskDetail = () => {
 
   const handleDeleteTask = useCallback(() => {
     try {
+      if(selectedTask)
       dispatch(removeTaskAsync(selectedTask?.id.toString()));
       navigation.goBack();
     } catch (error) {}
