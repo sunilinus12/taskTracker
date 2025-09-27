@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { requestPermission } from './src/utils';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { useNotificationListener } from './src/hooks/useNotificationListener';
+import { NavigationContainer } from '@react-navigation/native';
 
 function App() {
   const handleNotification = (data?: any) => {
@@ -27,7 +28,7 @@ function App() {
       const screen = data.screen;
       const params = data.params ? JSON.parse(data.params) : {};
       navigationRef.current?.navigate(screen, {
-        taskId: { ...params.taskId },
+        taskId: { ...params.task },
         canUpdate: true,
       });
     } catch (error) {
@@ -54,7 +55,8 @@ function App() {
     };
     createChannel();
   }, []);
-  useNotificationListener();
+
+
   return (
     <Provider store={store}>
       <SafeAreaProvider>

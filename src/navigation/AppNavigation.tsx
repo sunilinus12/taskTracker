@@ -2,18 +2,19 @@ import React, { useEffect } from 'react';
 import { TaskDetailsScreen, TaskScreen } from '../screens';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Task } from '../components/RenderItemCard';
-import { requestPermission } from '../utils';
-import notifee, { AndroidImportance } from '@notifee/react-native';
+import { useNotificationListener } from '../hooks/useNotificationListener';
 
 export type RootStackParamList = {
   Home: undefined; // no params
-  TaskDetails: { task?: Task | undefined ,canUpdate:boolean};
+  TaskDetails: { task?: Task | undefined; canUpdate: boolean };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const AppNavigation: React.FC = () => (
-  <NavigationContainer>
+const AppNavigation: React.FC = () => {
+  useNotificationListener();
+
+  return (
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={{ headerShown: false }}
@@ -29,7 +30,7 @@ const AppNavigation: React.FC = () => (
         options={{ title: 'Task Details' }}
       />
     </Stack.Navigator>
-  </NavigationContainer>
-);
+  );
+};
 
 export default AppNavigation;

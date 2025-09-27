@@ -65,6 +65,9 @@ export const sendLocalNotification = async (obj: Task) => {
       channelId: 'default',
       smallIcon: 'ic_launcher', // your icon
       importance: AndroidImportance.HIGH,
+      pressAction: {
+      id: 'default', // 👈 mandatory for PRESS event
+    },
     },
     ios: {
       sound: 'default',
