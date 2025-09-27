@@ -18,24 +18,11 @@ import { store } from './src/store';
 import { useEffect } from 'react';
 import { requestPermission } from './src/utils';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
-import { useNotificationListener } from './src/hooks/useNotificationListener';
 import { NavigationContainer } from '@react-navigation/native';
+import { useNotificationListener } from './src/hooks/useNotificationListener';
 
 function App() {
-  const handleNotification = (data?: any) => {
-    try {
-      if (!data) return;
-      const screen = data.screen;
-      const params = data.params ? JSON.parse(data.params) : {};
-      navigationRef.current?.navigate(screen, {
-        taskId: { ...params.task },
-        canUpdate: true,
-      });
-    } catch (error) {
-      console.error('error from', handleNotification);
-    }
-  };
-
+  const { handleNotification } = useNotificationListener();
   notifee.onBackgroundEvent(async ({ type, detail }) => {
     if (type === EventType.PRESS) {
       const data = detail.notification?.data;
@@ -44,18 +31,6 @@ function App() {
   });
 
   const isDarkMode = useColorScheme() === 'dark';
-  useEffect(() => {
-    requestPermission();
-    const createChannel = async () => {
-      await notifee.createChannel({
-        id: 'default',
-        name: 'Default Channel',
-        importance: AndroidImportance.HIGH,
-      });
-    };
-    createChannel();
-  }, []);
-
 
   return (
     <Provider store={store}>
