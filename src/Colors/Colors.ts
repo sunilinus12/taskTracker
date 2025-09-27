@@ -23,5 +23,6 @@ export const Colors= {
  highPriorityBorderColor:"#d60e0eff",
  pendingStatusBorderColor:"#0a5cc6ff",
  lowPriorityBorderColor:"#088745ff",
- mediumPriorityBorderColor:"#d5ad0aff"
+ mediumPriorityBorderColor:"#d5ad0aff",
+ lightGray:'#f1f1f1d3',
 }

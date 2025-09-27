@@ -10,6 +10,7 @@ import {
 import { Colors } from '../Colors/Colors';
 import { FontScale, HeightPercentage, WidthPercentage } from '../utils';
 import CustomTextInput from './CustomTextInput';
+import CommonButton from './CommonButton';
 
 type CommonHeaderProps = {
   title?: string;
@@ -23,6 +24,7 @@ type CommonHeaderProps = {
   onSearchTextChange?: (e: string) => void;
   searchValue?: string;
   searchPlaceholder?: string;
+  filterBtnDisable?: boolean;
 };
 
 const CommonHeader: React.FC<CommonHeaderProps> = ({
@@ -37,6 +39,7 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
   searchValue,
   onSearchTextChange,
   searchPlaceholder,
+  filterBtnDisable = true,
 }) => {
   return (
     <>
@@ -65,6 +68,13 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
             style={styles.searchContainer}
           />
         )}
+        <CommonButton
+          title=" Filters"
+          onPress={() => {}}
+          enableDisableScheme={false}
+          style={styles.selectedFilter}
+          textStyle={{ ...styles.selectedTextStyle }}
+        />
       </View>
     </>
   );
@@ -119,5 +129,16 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     marginTop: HeightPercentage(2),
+  },
+  selectedFilter: {
+    width: WidthPercentage(20),
+    paddingVertical: HeightPercentage(1),
+    borderRadius: 5,
+  },
+  selectedTextStyle: {
+    // color: Colors.blackVarient,
+    fontSize: FontScale(10),
+    backgroundColor: 'transparent',
+    letterSpacing: 0.1,
   },
 });

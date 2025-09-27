@@ -16,6 +16,7 @@ type CommonButtonProps = {
   disabled?: boolean;
   style?: ViewStyle;
   textStyle?: TextStyle;
+  enableDisableScheme?: boolean;
 };
 
 const CommonButton: React.FC<CommonButtonProps> = ({
@@ -25,10 +26,14 @@ const CommonButton: React.FC<CommonButtonProps> = ({
   disabled = false,
   style,
   textStyle,
+  enableDisableScheme = false,
 }) => {
   const getButtonStyle = () => {
     if (type === 'save') {
-      return [styles.saveButton, disabled && styles.saveButtonDisabled];
+      return [
+        styles.saveButton,
+        (disabled || enableDisableScheme) && styles.saveButtonDisabled,
+      ];
     }
     if (type === 'delete') {
       return styles.deleteButton;
