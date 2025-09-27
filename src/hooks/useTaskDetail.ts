@@ -8,6 +8,8 @@ import {
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
 import { sendLocalNotification } from '../utils';
+import Toast from 'react-native-toast-message';
+import { Keyboard } from 'react-native';
 
 const useTaskDetail = () => {
   const dispatch = useAppDispatch();
@@ -32,8 +34,8 @@ const useTaskDetail = () => {
   const [showPicker, setShowPicker] = useState(false);
   const onChangeDatePickerValue = useCallback(
     (event: any, selectedDate?: Date) => {
-      // setShowPicker(Platform.OS === 'ios'); 
-      setShowPicker(false)
+      // setShowPicker(Platform.OS === 'ios');
+      setShowPicker(false);
       if (selectedDate) setDueDate(selectedDate);
     },
     [],
@@ -42,6 +44,7 @@ const useTaskDetail = () => {
   const handleTask = useCallback(() => {
     try {
       if (!title) return;
+      Keyboard.dismiss();
       const obj = {
         id: canUpdate && selectedTask?.id ? selectedTask.id : uuidv4(),
         title,
@@ -54,10 +57,22 @@ const useTaskDetail = () => {
       };
       if (canUpdate) {
         dispatch(updateTaskAsync(obj));
+        Toast.show({
+          text1: 'Task updated successfully ✏️',
+          type: 'success',
+          position: 'bottom',
+        });
       } else {
         dispatch(addTaskAsync(obj));
         sendLocalNotification(obj);
       }
+      Toast.show({
+        type: 'success',
+        text1: 'Task created successfully ✅',
+        position: 'bottom',
+        visibilityTime: 2500,
+      });
+
       navigation.goBack();
     } catch (error) {
       console.error('handleTask error:', error);

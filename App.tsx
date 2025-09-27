@@ -18,6 +18,7 @@ import { store } from './src/store';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNotificationListener } from './src/hooks/useNotificationListener';
+import Toast from 'react-native-toast-message';
 
 function App() {
   const { handleNotification } = useNotificationListener();
@@ -38,6 +39,7 @@ function App() {
           <NavigationContainer ref={navigationRef}>
             <AppNavigation />
           </NavigationContainer>
+           <Toast />
         </SafeAreaView>
       </SafeAreaProvider>
     </Provider>

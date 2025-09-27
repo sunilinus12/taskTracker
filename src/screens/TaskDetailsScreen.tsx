@@ -118,6 +118,7 @@ const TaskDetailsScreen: React.FC<Props> = ({ navigation, route }) => {
             </TouchableOpacity>
             {showPicker && (
               <DateTimePicker
+                minimumDate={new Date()}
                 value={dueDate || new Date()}
                 mode="date"
                 display="default"

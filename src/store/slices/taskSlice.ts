@@ -61,7 +61,7 @@ const taskSlice = createSlice({
         state.loading = false;
       })
       .addCase(addTaskAsync.fulfilled, (state, action: PayloadAction<Task>) => {
-        state.tasks.push(action.payload);
+        state.tasks=[action.payload,...state.tasks];
       })
       .addCase(
         updateTaskAsync.fulfilled,
